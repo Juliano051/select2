@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="fa98c8ba-5f38-43f0-8268-f380c7164f0a" name="cohab.recife" url="http://localhost">
+        <fileTransfer port="0" mountedRoot="/media/cohab.recife/reciprev" accessType="MOUNT" />
+      </webServer>
+    </option>
+  </component>
+</project>

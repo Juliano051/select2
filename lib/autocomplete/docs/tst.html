@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    
+
+   
+</head>
+<body>
+    <h4>Dados Bancários:</h4>
+ 
+                                        <div class="form-float">
+                                            <label for="banco">Timezone</label>
+                                            <input type="text" class="form-control" placeholder="Banco (Código / Nome)" list="list-timezone" id="banco">
+                                            <datalist id="list-timezone">
+                                                <option>001 - Banco do Brasil</option>
+                                                <option>014 - Caixa Econômica</option>
+                                                <option>Asia/Baghdad</option>
+                                                <option>Asia/Barnaul</option>
+                                                <option>Asia/Chita</option>
+                                                <option>Asia/Dhaka</option>
+                                                <option>Asia/Famagusta</option>
+                                                <option>Asia/Hong_Kong</option>
+                                                <option>Asia/Jayapura</option>
+                                                <option>Asia/Kuala_Lumpur</option>
+                                                <option>Asia/Jakarta</option>
+                                            </datalist>
+                                        </div>
+
+                                        <script>
+                                            document.addEventListener('DOMContentLoaded', e => {
+                                                $('#banco').autocomplete()
+                                            }, false);
+                                        </script>
+                                   
+                             
+                            
+
+    <!--script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.16.0/prism.min.js" data-manual></script-->
+   
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="js/bootstrap-autocomplete.js"></script>
+</body>
+</html>

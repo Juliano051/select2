@@ -1,0 +1,28 @@
+{
+  "deploy": {
+    "packages": [
+      {
+        "name": "Version 2.3.4",
+        "description": "Package version 1.0",
+        "files": ["**/*.*"],
+        "exclude": ["tests/**"],
+        "deployOnSave": true
+      }
+    ],
+    "targets": [
+      {
+        "type": "local",
+        "name": "My local folder",
+        "description": "A local folder",
+        "dir": "C:\\xampp\\htdocs\\my_package_files2"
+      },
+      {
+        "type": "local",
+        "name": "COHAB",
+        "description": "Desenv em COHAB",
+        "dir": "\\\\cohab.recife\\raiz\\html\\pr\\secfinancas\\emprel\\desenv\\juliano\\reciprev"
+      }
+    ]
+  },
+  "files.encoding": "windows1252"
+}
