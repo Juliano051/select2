@@ -225,6 +225,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding-top: 21px;
         }
 
+
+
         /*--------select2-css----*/
         .select2Part .floating-label {
             opacity: 0;
@@ -465,20 +467,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             padding-top: 17px;
             padding-left: 17px;
         }
-        </style>
+    </style>
 
-        </head>
+</head>
 
-        <body>
-                                    <form method="post">
+<body>
+                            <form method="post">
+                               
+
+
                                         <div class="form-group select2Part w-100 floating-group">
                                             <label class="floating-label">Funcionário</label>
-                                            <select name="term" id="state" class="form-control customSelectMultiple floating-control selectjs" placeholder="Informe o nome do Funcionário">
+                                            <select name="" id="state" class="form-control customSelectMultiple floating-control" placeholder="Informe o nome do Funcionário">
                                                 <option value=""></option>
+
                                             </select>
+                                            <select class="js-data-example-ajax"></select>
                                         </div>
                                         <!-- ************************************************************************* -->
-                                        <
+                                        
                             </form>
                             </div>
                     </div>
@@ -488,51 +495,59 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <!-- JavaScript Libraries -->
 
             <script>
-               
+                
+                $(document).ready(function() {
+                    $('.js-data-example-ajax').select2({
+                    ajax: {
+                        url: 'https://api.github.com/search/repositories',
+                        data: function (params) {
+                        var query = {
+                            search: params.term,
+                            type: 'public'
+                        }
 
-//                     $('.js-data-example-ajax').select2({
-//   ajax: {
-//     url: 'https://api.github.com/orgs/select2/repos',
-//     data: function (params) {
-//       var query = {
-//         search: params.term,
-//         type: 'public'
-//       }
-
-//       // Query parameters will be ?search=[term]&type=public
-//       return query;
-//     }
-//   }
-// });
-
-                    // Set up the Select2 control
-                    $(document).ready(function() {
-                        alert("script ok")
-
-                        $('.customSelectMultiple').select2({
-                            minimumInputLength: 5,
-                            ajax: {
-                                url: 'https://api.github.com/search/repositories',
-                                type: 'GET',
-                                dataType: 'json',
-                                delay: 1000,
-                                data: function(params){
-                                    return {
-                                        q: params.term
-                                    };
-                                },
-                            processResults: function(data){
-                                return {
-                                    results: data
-                                };
-                            },
-                            cache: true
-                        } 
-                        
-                        });
-                        
+                        // Query parameters will be ?search=[term]&type=public
+                        return query;
+                        }
+                    }
                     });
-              
+
+                    $.getJSON("https://api.github.com/search/repositories?q=joomla", function(json) {
+                        $.each(json, function(key, entry) {
+                            entry.cpf = String(entry.cpf).slice(0,3)+".***.***-"+String(entry.cpf).slice(9,11);
+                            $('#state').append($('<option></option>').attr('value', entry.id).text(String(entry.cpf) +" - "+ entry.label ));
+                        })
+                    });
+
+                    //---- select2 multiple----
+                    $('.customSelectMultiple').each(function() {
+                        var dropdownParents = $(this).parents('.select2Part');
+                        var placehldrget = $(this).attr("data-placeholder");
+
+                        $(this).select2({
+                            dropdownParent: dropdownParents,
+                            placeholder: "Funcionário",
+                            // tags: true,
+                            // closeOnSelect: false,
+                        }).on("select2:open", function(e) {
+                            $(this).parents('.floating-group').addClass('focused');
+                            $('.select2-selection__placeholder').attr("hidden", true);
+                        }).on("select2:close", function(e) {
+                            if ($(this).val() != '') {
+                                $(this).parents('.floating-group').addClass('focused');
+                                alert("Id: "+$(this).val());
+                            } else {
+                                $(this).parents('.floating-group').removeClass('focused');
+                                $('.select2-selection__placeholder').removeAttr("hidden");
+                            }
+                        }).on("select2:select", function(e) {
+                            $(this).parents('.floating-group').addClass('focused');
+                        }).on("select2:unselect", function(e) {
+                            $(this).parents('.floating-group').addClass('focused');
+                           
+                        })
+                    });
+                });
             </script>
 
 </body>
